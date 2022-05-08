@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "django-cardinality-esitmation"
+version = "0.1.0"
+description = ""
+authors = ["AlexBieg <alexbieg95@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+Django = "^4.0.4"
+psycopg2 = "^2.9.3"
+black = "^22.3.0"
+pylint = "^2.13.8"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
