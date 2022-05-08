@@ -2,7 +2,7 @@ from django.db import models
 
 
 class AkaName(models.Model):
-    person_id = models.ForeignKey('Name', on_delete=models.CASCADE)
+    person = models.ForeignKey('Name', on_delete=models.CASCADE)
     name = models.CharField(max_length=1000, blank=True, null=True)
     imdb_index = models.CharField(max_length=3, blank=True, null=True)
     name_pcode_cf = models.CharField(max_length=11, blank=True, null=True)
