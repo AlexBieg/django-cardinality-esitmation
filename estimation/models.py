@@ -15,10 +15,10 @@ class AkaName(models.Model):
 
 
 class AkaTitle(models.Model):
-    movie_id = models.ForeignKey('Title', on_delete=models.CASCADE)
+    movie = models.ForeignKey('Title', on_delete=models.CASCADE)
     title = models.CharField(max_length=1000, blank=True, null=True)
     imdb_index = models.CharField(max_length=4, blank=True, null=True)
-    kind_id = models.ForeignKey('KindType', on_delete=models.CASCADE)
+    kind = models.ForeignKey('KindType', on_delete=models.CASCADE)
     production_year = models.IntegerField(blank=True, null=True)
     phonetic_code = models.CharField(max_length=5, blank=True, null=True)
     episode_of_id = models.IntegerField(blank=True, null=True)
@@ -32,12 +32,12 @@ class AkaTitle(models.Model):
 
 
 class CastInfo(models.Model):
-    person_id = models.ForeignKey('Name', on_delete=models.CASCADE)
-    movie_id = models.ForeignKey('Title', on_delete=models.CASCADE)
-    person_role_id = models.ForeignKey('CharName', on_delete=models.CASCADE)
+    person = models.ForeignKey('Name', on_delete=models.CASCADE)
+    movie = models.ForeignKey('Title', on_delete=models.CASCADE)
+    person_role = models.ForeignKey('CharName', on_delete=models.CASCADE)
     note = models.CharField(max_length=1000, blank=True, null=True)
     nr_order = models.IntegerField(blank=True, null=True)
-    role_id = models.ForeignKey('RoleType', on_delete=models.CASCADE)
+    role = models.ForeignKey('RoleType', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'cast_info'
@@ -82,7 +82,7 @@ class CompanyType(models.Model):
 
 
 class CompleteCast(models.Model):
-    movie_id = models.ForeignKey('Title', on_delete=models.CASCADE)
+    movie = models.ForeignKey('Title', on_delete=models.CASCADE)
     subject_id = models.IntegerField()
     status_id = models.IntegerField()
 
@@ -120,9 +120,9 @@ class LinkType(models.Model):
 
 
 class MovieCompanies(models.Model):
-    movie_id = models.ForeignKey('Title', on_delete=models.CASCADE)
-    company_id = models.ForeignKey('CompanyName', on_delete=models.CASCADE)
-    company_type_id = models.ForeignKey('CompanyType', on_delete=models.CASCADE)
+    movie = models.ForeignKey('Title', on_delete=models.CASCADE)
+    company = models.ForeignKey('CompanyName', on_delete=models.CASCADE)
+    company_type = models.ForeignKey('CompanyType', on_delete=models.CASCADE)
     note = models.CharField(max_length=1000, blank=True, null=True)
 
     class Meta:
@@ -130,8 +130,8 @@ class MovieCompanies(models.Model):
 
 
 class MovieInfo(models.Model):
-    movie_id = models.ForeignKey('Title', on_delete=models.CASCADE)
-    info_type_id = models.ForeignKey('InfoType', on_delete=models.CASCADE)
+    movie = models.ForeignKey('Title', on_delete=models.CASCADE)
+    info_type = models.ForeignKey('InfoType', on_delete=models.CASCADE)
     info = models.CharField(max_length=1000)
     note = models.CharField(max_length=1000, blank=True, null=True)
 
@@ -140,8 +140,8 @@ class MovieInfo(models.Model):
 
 
 class MovieInfoIdx(models.Model):
-    movie_id = models.ForeignKey('Title', on_delete=models.CASCADE)
-    info_type_id = models.ForeignKey('InfoType', on_delete=models.CASCADE)
+    movie = models.ForeignKey('Title', on_delete=models.CASCADE)
+    info_type = models.ForeignKey('InfoType', on_delete=models.CASCADE)
     info = models.CharField(max_length=1000)
     note = models.CharField(max_length=1, blank=True, null=True)
 
@@ -150,17 +150,17 @@ class MovieInfoIdx(models.Model):
 
 
 class MovieKeyword(models.Model):
-    movie_id = models.ForeignKey('Title', on_delete=models.CASCADE)
-    keyword_id = models.ForeignKey('Keyword', on_delete=models.CASCADE)
+    movie = models.ForeignKey('Title', on_delete=models.CASCADE)
+    keyword = models.ForeignKey('Keyword', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'movie_keyword'
 
 
 class MovieLink(models.Model):
-    movie_id = models.ForeignKey('Title', on_delete=models.CASCADE, related_name='movies')
-    linked_movie_id = models.ForeignKey('Title', on_delete=models.CASCADE, related_name='linked_movies')
-    link_type_id = models.ForeignKey('LinkType', on_delete=models.CASCADE)
+    movie = models.ForeignKey('Title', on_delete=models.CASCADE, related_name='movies')
+    linked_movie = models.ForeignKey('Title', on_delete=models.CASCADE, related_name='linked_movies')
+    link_type = models.ForeignKey('LinkType', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'movie_link'
@@ -181,8 +181,8 @@ class Name(models.Model):
 
 
 class PersonInfo(models.Model):
-    person_id = models.ForeignKey('Name', on_delete=models.CASCADE)
-    info_type_id = models.ForeignKey('InfoType', on_delete=models.CASCADE)
+    person = models.ForeignKey('Name', on_delete=models.CASCADE)
+    info_type = models.ForeignKey('InfoType', on_delete=models.CASCADE)
     info = models.CharField(max_length=1000)
     note = models.CharField(max_length=1000, blank=True, null=True)
 
@@ -200,7 +200,7 @@ class RoleType(models.Model):
 class Title(models.Model):
     title = models.CharField(max_length=1000)
     imdb_index = models.CharField(max_length=5, blank=True, null=True)
-    kind_id = models.ForeignKey('KindType', on_delete=models.CASCADE)
+    kind = models.ForeignKey('KindType', on_delete=models.CASCADE)
     production_year = models.IntegerField(blank=True, null=True)
     imdb_id = models.IntegerField(blank=True, null=True)
     phonetic_code = models.CharField(max_length=5, blank=True, null=True)
